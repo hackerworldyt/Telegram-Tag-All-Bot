@@ -16,13 +16,13 @@ LOGGER = logging.getLogger(__name__)
 api_id = int(os.environ.get("APP_ID"))
 api_hash = os.environ.get("API_HASH")
 bot_token = os.environ.get("TOKEN")
-decodebot = TelegramClient('client', api_id, api_hash).start(bot_token=bot_token)
+HwBot = TelegramClient('client', api_id, api_hash).start(bot_token=bot_token)
 
 moment_worker = []
 
 
 #start
-@decodebot.on(events.NewMessage(pattern="^/start$"))
+@HwBot.on(events.NewMessage(pattern="^/start$"))
 async def start(event):
   await event.reply("^_^ Hey, Welcome To TAG Help Bot's Menu\nI can tag 15,000 Members in Group and 300 Members In Channel.\nNeed Help /help ",
                     buttons=(
@@ -31,21 +31,21 @@ async def start(event):
                          Button.url('⭐SUPPORT', 'https://t.me/CFC_BOT_SUPPORT'), 
                       ], 
                       [
-                        Button.url('➕ ADD ME TO YOUR GROUP', 'https://t.me/MEMBER_TAGERBOT?startgroup=true'),   
+                        Button.url('➕ ADD ME TO YOUR GROUP', 'https://t.me/HwMusicBot?startgroup=true'),   
                       ]
                    ), 
                     link_preview=False
                    )
 
 #help
-@decodebot.on(events.NewMessage(pattern="^/help$"))
+@HwBot.on(events.NewMessage(pattern="^/help$"))
 async def help(event):
   helptext = "**Tag Help Bot's Help Menu**\n\nCommand: /all \n You can use this command with text you want to tell others. \n`Example: /all Good morning!` \nYou can use this command as an answer. any message Bot will tag users to replied message"
   await event.reply(helptext,
                     buttons=(
                       [
                          Button.url('📣 UPDATES', 'https://t.me/HwMusicUpdates'), 
-                         Button.url('⭐SUPPORT', 'https://t.me/DeCodeSupport'), 
+                         Button.url('⭐SUPPORT', 'https://t.me/CFC_BOT_SUPPORT'), 
                       ], 
                       [
                         Button.url('➕ ADD ME TO YOUR GROUP', 'https://t.me/HwMusicBot?startgroup=true'),   
@@ -59,14 +59,14 @@ async def help(event):
 #bsdk credit de dena verna maa chod dege
 
 #tag
-@decodebot.on(events.NewMessage(pattern="^/tagall|/call|/tall|/all|#all|@all?(.*)"))
+@HwBot.on(events.NewMessage(pattern="^/tagall|/call|/tall|/all|#all|@all?(.*)"))
 async def mentionall(event):
   global moment_worker
   if event.is_private:
     return await event.respond("Use This In Channel or Group!")
   
   admins = []
-  async for admin in decodebot.iter_participants(event.chat_id, filter=ChannelParticipantsAdmins):
+  async for admin in HwBot.iter_participants(event.chat_id, filter=ChannelParticipantsAdmins):
     admins.append(admin.id)
   if not event.sender_id in admins:
     return await event.respond("Only Admin can use it.")
@@ -88,14 +88,14 @@ async def mentionall(event):
     moment_worker.append(event.chat_id)
     usrnum = 0
     usrtxt = ""
-    async for usr in decodebot.iter_participants(event.chat_id):
+    async for usr in HwBot.iter_participants(event.chat_id):
       usrnum += 1
       usrtxt += f"[{usr.first_name}](tg://user?id={usr.id}) "
       if event.chat_id not in moment_worker:
         await event.respond("Stopped!")
         return
       if usrnum == 5:
-        await decodebot.send_message(event.chat_id, f"{usrtxt}\n\n{msg}")
+        await HwBot.send_message(event.chat_id, f"{usrtxt}\n\n{msg}")
         await asyncio.sleep(2)
         usrnum = 0
         usrtxt = ""
@@ -106,14 +106,14 @@ async def mentionall(event):
  
     usrnum = 0
     usrtxt = ""
-    async for usr in decodebot.iter_participants(event.chat_id):
+    async for usr in HwBot.iter_participants(event.chat_id):
       usrnum += 1
       usrtxt += f"[{usr.first_name}](tg://user?id={usr.id}) "
       if event.chat_id not in moment_worker:
         await event.respond("Stopped")
         return
       if usrnum == 5:
-        await decodebot.send_message(event.chat_id, usrtxt, reply_to=msg)
+        await HwBot.send_message(event.chat_id, usrtxt, reply_to=msg)
         await asyncio.sleep(2)
         usrnum = 0
         usrtxt = ""
@@ -121,7 +121,7 @@ async def mentionall(event):
 
 # Cancle 
 
-@decodebot.on(events.NewMessage(pattern="^/cancel$"))
+@HwBot.on(events.NewMessage(pattern="^/cancel$"))
 async def cancel_spam(event):
   if not event.chat_id in spam_chats:
     return await event.respond('__There is no proccess on going...__')
@@ -130,11 +130,11 @@ async def cancel_spam(event):
       spam_chats.remove(event.chat_id)
     except:
       pass
-    return await event.respond('**__Stoped__**\n\n**__Powered By:__ @TeamDeeCode**')
+    return await event.respond('**__Stopped__**\n\n**__Powered By:__ @HwMusicUpdates**')
 
 
 
 
 print("Started Successfully Join Support")
-print("¯\_(ツ)_/¯ Need Help Join @DeCodeSupport")
-decodebot.run_until_disconnected()
+print("¯\_(ツ)_/¯ Need Help Join @CFC_BOT_SUPPORT")
+HwBot.run_until_disconnected()
