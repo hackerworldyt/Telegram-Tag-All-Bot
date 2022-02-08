@@ -5,7 +5,7 @@
 
 ## DEPLOY ON HEROKU 🚀
 
-<p align="center"><a href="https://heroku.com/deploy?template=https://github.com/hackerworldyt/TagAllBot"><img align="center" alt="Heroku" width="52px" src="https://www.nicepng.com/png/full/223-2233246_heroku-logo-salesforce-heroku.png"></p>
+<p align="center"><a href="https://heroku.com/deploy?template=https://github.com/hackerworldyt/Telegram-Tag-All-Bot"><img align="center" alt="Heroku" width="52px" src="https://www.nicepng.com/png/full/223-2233246_heroku-logo-salesforce-heroku.png"></p>
  
 
 
@@ -20,4 +20,4 @@ TOKEN :- GET IT FROM @BOTFATHER
 ```
 
 #Credit
-(HACKER WORLD)[https://t.me/iamhackerworld]
+[HACKER WORLD](https://t.me/iamhackerworld)
